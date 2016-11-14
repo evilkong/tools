@@ -1,0 +1,16 @@
+{
+    "name": "u0mo5/tools",
+    "description": "tools",
+    "authors": [
+        {
+            "name": "Think Young",
+            "email": "u0mo5@qq.com"
+        }
+    ],
+    "require": {},
+	"autoload": {
+        "psr-4": {
+            "U0mo5\\Tools\\": "U0mo5/Tools"
+        }
+    }
+}
