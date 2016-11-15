@@ -9,7 +9,7 @@ namespace U0mo5\Tools;
 class Nets{
 
 
-    //发送https的post获取内容
+    //发送https的post获取内容 send
     //$data = curlPost('https://api.lwl12.com/hitokoto/main/get', array('p'=>'hello'));
     //echo ($data);
     public static function curlPost($url, $data, $timeout = 30)
