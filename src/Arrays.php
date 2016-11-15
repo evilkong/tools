@@ -38,4 +38,34 @@ class Arrays {
 		}
 		return $array;
 	}
+
+    /**
+     * 功能：两个数组并集
+     */
+    public static function array_and($array1=array(), $array2=array())
+    {
+        //$res = array();   //结果数组
+        $res = $array1;   //直接将数组1赋值给结果数组
+
+        $arr2 = array_diff($array2,$array1);
+
+        $res = array_merge($res , $arr2);
+
+        return is_array($res) ? $res : array();
+    }
+
+    /**
+     * 获取数组 主键  转换成以主键为索引数组
+     * 1=>row(id=>1,.....)
+     */
+    public static function array_add_index($arr,$key){
+        $out=array();
+        foreach ($arr as $v){
+            $out[($v[$key])]=$v;
+        }
+        return $out;
+    }
+
+
+
 }
