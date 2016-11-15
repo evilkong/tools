@@ -11,7 +11,7 @@
     "require": {},
 	"autoload": {
         "psr-4": {
-            "U0mo5\\Tools\\": "U0mo5/Tools"
+            "U0mo5\\Tools\\": "src"
         }
     }
 }
