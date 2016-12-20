@@ -4,7 +4,7 @@
  * User: u0mo5
  * Date: 2015/9/30
  * Time: 13:36
-T\Apis\Qrcode::show('http://bookfuns.com');
+ * T\Apis\Qrcode::show('http://bookfuns.com');
  */
 namespace U0mo5\Tools\Apis;
 class Qrcode{
