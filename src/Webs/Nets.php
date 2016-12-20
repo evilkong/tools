@@ -5,7 +5,7 @@
  * Date: 2015/9/30
  * Time: 13:36
  */
-namespace U0mo5\Tools;
+namespace U0mo5\Tools\Webs;
 class Nets{
 
 
