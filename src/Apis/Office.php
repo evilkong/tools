@@ -21,7 +21,7 @@ class Office{
 
 //默认url
     public static function callback($url=""){
-        return office_365($url);
+        return self::office_365($url);
     }
 //直接显示
     public static function show($url,$callback="callback"){
