@@ -4,15 +4,15 @@ namespace U0mo5\Tools\Webs;
  * @name CurlRequest php 请求类
  * @license 基于curl 实现， 可模拟多线程任务
  *
- *
 function fetch($url){
-$curl=new CurlRequest();
+$curl=new U0mo5\Tools\Webs\CurlRequest();
 $out=$curl->timeout(0);
 $out = $curl->url($url);
 $out=$curl->get();
 echo ($out['data']);
 echo "<hr>";
 }
+fetch("http://www.baidu.com");
  */
 class CurlRequest
 {
