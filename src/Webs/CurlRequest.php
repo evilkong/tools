@@ -3,6 +3,16 @@ namespace U0mo5\Tools\Webs;
 /**
  * @name CurlRequest php 请求类
  * @license 基于curl 实现， 可模拟多线程任务
+ *
+ *
+function fetch($url){
+$curl=new CurlRequest();
+$out=$curl->timeout(0);
+$out = $curl->url($url);
+$out=$curl->get();
+echo ($out['data']);
+echo "<hr>";
+}
  */
 class CurlRequest
 {
@@ -97,7 +107,7 @@ class CurlRequest
      */
     public function post()
     {
-        $returnData;
+        $returnData=null;
         // 1. 初始化
         $ch = curl_init();
         // 2. 设置选项，包括URL
