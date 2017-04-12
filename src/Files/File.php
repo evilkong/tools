@@ -6,7 +6,7 @@
  * Time: 13:36
  */
 namespace U0mo5\Tools;
-class Files
+class File
 {
 
     /**
@@ -120,6 +120,7 @@ class Files
     public static function file_info($path){
         $name = self::get_path_this($path);
         $size = self::get_filesize($path);
+        $hash = hash_file("md5",$path);
         $info = array(
             'name'			=> self::iconv_app($name),
             'path'			=> self::iconv_app(self::get_path_father($path)),
@@ -132,7 +133,8 @@ class Files
             'is_readable'	=> intval(is_readable($path)),
             'is_writeable'	=> intval(is_writeable($path)),
             'size'			=> $size,
-            'size_friendly'	=> self::size_format($size, 2)
+            'size_friendly'	=> self::size_format($size, 2),
+            'hash'          =>$hash
         );
         return $info;
     }
