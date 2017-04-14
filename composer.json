@@ -13,6 +13,13 @@
 	"autoload": {
         "psr-4": {
             "U0mo5\\Tools\\": "src"
-        }
+
+        },
+        "files": [
+            "src/Files/functions.php",
+            "src/Webs/functions.php",
+            "src/Strings/functions.php",
+            "src/Debugs/functions.php"
+        ]
     }
 }
