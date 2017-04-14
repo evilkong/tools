@@ -7,8 +7,8 @@
  *
  * T\Debugs::debug_out(array("12"=>12,"name"=>array("1","ok")));
  */
-namespace U0mo5\Tools;
-class Debugs{
+namespace U0mo5\Tools\Debugs;
+class Debug{
 
 
     //console.log
@@ -105,6 +105,9 @@ class Debugs{
             }
         }
     }
+
+
+
 
 
 
