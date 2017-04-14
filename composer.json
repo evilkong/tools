@@ -19,7 +19,8 @@
             "src/Files/functions.php",
             "src/Webs/functions.php",
             "src/Strings/functions.php",
-            "src/Debugs/functions.php"
+            "src/Debugs/functions.php",
+            "src/Arrays/functions.php"
         ]
     }
 }
