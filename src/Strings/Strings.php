@@ -5,8 +5,8 @@
  * Date: 2015/9/30
  * Time: 13:36
  */
-namespace U0mo5\Tools;
-class Strings
+namespace U0mo5\Tools\Strings;
+class String
 {
 
     /**
@@ -227,5 +227,46 @@ echo cut_str($str, 1, 0).'**'.cut_str($str, 1, -1);
     {
         return mb_substr($string, $start, $length, 'UTF-8');
     }
+
+    /**
+     * 实现多种字符编码方式
+     * @param $input 需要编码的字符串
+     * @param $_output_charset 输出的编码格式
+     * @param $_input_charset 输入的编码格式
+     * @return string $output 编码后的字符串
+     */
+    public static function charsetEncode($input,$_output_charset ,$_input_charset) {
+        $output = "";
+        if(!isset($_output_charset) )$_output_charset  = $_input_charset;
+        if($_input_charset == $_output_charset || $input ==null ) {
+            $output = $input;
+        } elseif (function_exists("mb_convert_encoding")) {
+            $output = mb_convert_encoding($input,$_output_charset,$_input_charset);
+        } elseif(function_exists("iconv")) {
+            $output = iconv($_input_charset,$_output_charset,$input);
+        } else die("sorry, you have no libs support for charset change.");
+        return $output;
+    }
+    /**
+     * 实现多种字符解码方式
+     * @param $input 需要解码的字符串
+     * @param $_output_charset 输出的解码格式
+     * @param $_input_charset 输入的解码格式
+     * @return string $output 解码后的字符串
+     */
+    public static function charsetDecode($input,$_input_charset ,$_output_charset) {
+        $output = "";
+        if(!isset($_input_charset) )$_input_charset  = $_input_charset ;
+        if($_input_charset == $_output_charset || $input ==null ) {
+            $output = $input;
+        } elseif (function_exists("mb_convert_encoding")) {
+            $output = mb_convert_encoding($input,$_output_charset,$_input_charset);
+        } elseif(function_exists("iconv")) {
+            $output = iconv($_input_charset,$_output_charset,$input);
+        } else die("sorry, you have no libs support for charset changes.");
+        return $output;
+    }
+
+
 
 }
