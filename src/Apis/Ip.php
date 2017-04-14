@@ -16,6 +16,13 @@ class Ip{
         $data=file_get_contents($url);
         return $json=json_decode($data);
     }
+    //sina 接口
+    public static function taobao($ip){
+
+        $url="http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
+        $data=file_get_contents($url);
+        return $json=json_decode($data);
+    }
 //默认url
     public static function callback($url=""){
         $data=file_get_contents($url);
