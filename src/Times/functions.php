@@ -1,21 +1,13 @@
 <?php
-/**
- * Created by u0mo5.
- * User: u0mo5
- * Date: 2015/9/30
- * Time: 13:36
- */
-namespace U0mo5\Tools;
-class Times
-{
+
 
     //获得当前毫秒级时间戳
-    public static function getMillisecond() {
+     function getMillisecond() {
         list($t1, $t2) = explode(' ', microtime());
         return (float)sprintf('%.0f',(floatval($t1)+floatval($t2))*1000);
     }
     //获得时间
-    public static function get_datetime(){
+     function get_datetime(){
         return  date ( 'Y-m-d H:i:s' ) ;
     }
 
@@ -24,7 +16,7 @@ class Times
      *
      * @return array
      */
-    public static function today()
+     function today()
     {
         return [
             mktime(0, 0, 0, date('m'), date('d'), date('Y')),
@@ -37,7 +29,7 @@ class Times
      *
      * @return array
      */
-    public static function yesterday()
+     function yesterday()
     {
         $yesterday = date('d') - 1;
         return [
@@ -51,7 +43,7 @@ class Times
      *
      * @return array
      */
-    public static function week()
+     function week()
     {
         $timestamp = time();
         return [
@@ -65,7 +57,7 @@ class Times
      *
      * @return array
      */
-    public static function lastWeek()
+     function lastWeek()
     {
         $timestamp = time();
         return [
@@ -79,7 +71,7 @@ class Times
      *
      * @return array
      */
-    public static function month()
+     function month()
     {
         return [
             mktime(0, 0, 0, date('m'), 1, date('Y')),
@@ -92,7 +84,7 @@ class Times
      *
      * @return array
      */
-    public static function lastMonth()
+     function lastMonth()
     {
         $begin = mktime(0, 0, 0, date('m') - 1, 1, date('Y'));
         $end = mktime(23, 59, 59, date('m') - 1, date('t', $begin), date('Y'));
@@ -105,7 +97,7 @@ class Times
      *
      * @return array
      */
-    public static function year()
+     function year()
     {
         return [
             mktime(0, 0, 0, 1, 1, date('Y')),
@@ -118,7 +110,7 @@ class Times
      *
      * @return array
      */
-    public static function lastYear()
+     function lastYear()
     {
         $year = date('Y') - 1;
         return [
@@ -127,7 +119,7 @@ class Times
         ];
     }
 
-    public static function dayOf()
+     function dayOf()
     {
 
     }
@@ -139,12 +131,12 @@ class Times
      * @param bool $now 返回现在或者昨天结束时间戳
      * @return array
      */
-    public static function dayToNow($day = 1, $now = true)
+     function dayToNow($day = 1, $now = true)
     {
         $foo=null;
         $end = time();
         if (!$now) {
-            list($foo, $end) = self::yesterday();
+            list($foo, $end) = yesterday();
         }
         unset($foo);
         return [
@@ -159,10 +151,10 @@ class Times
      * @param int $day
      * @return int
      */
-    public static function daysAgo($day = 1)
+     function daysAgo($day = 1)
     {
         $nowTime = time();
-        return $nowTime - self::daysToSecond($day);
+        return $nowTime - daysToSecond($day);
     }
 
     /**
@@ -171,10 +163,10 @@ class Times
      * @param int $day
      * @return int
      */
-    public static function daysAfter($day = 1)
+     function daysAfter($day = 1)
     {
         $nowTime = time();
-        return $nowTime + self::daysToSecond($day);
+        return $nowTime + daysToSecond($day);
     }
 
     /**
@@ -183,7 +175,7 @@ class Times
      * @param int $day
      * @return int
      */
-    public static function daysToSecond($day = 1)
+     function daysToSecond($day = 1)
     {
         return $day * 86400;
     }
@@ -194,9 +186,9 @@ class Times
      * @param int $week
      * @return int
      */
-    public static function weekToSecond($week = 1)
+     function weekToSecond($week = 1)
     {
-        return self::daysToSecond() * 7 * $week;
+        return daysToSecond() * 7 * $week;
     }
 //from ecshop   thanks
     /**
@@ -204,7 +196,7 @@ class Times
      *
      * @return  integer
      */
-    public static function gmtime()
+     function gmtime()
     {
         return (time() - date('Z'));
     }
@@ -214,7 +206,7 @@ class Times
      *
      * @return  integer
      */
-    public static function server_timezone()
+     function server_timezone()
     {
         if (function_exists('date_default_timezone_get')) {
             return date_default_timezone_get();
@@ -229,7 +221,7 @@ class Times
      *
      *
      */
-    public static function local_mktime($hour = NULL, $minute = NULL, $second = NULL, $month = NULL, $day = NULL, $year = NULL)
+     function local_mktime($hour = NULL, $minute = NULL, $second = NULL, $month = NULL, $day = NULL, $year = NULL)
     {
         $timezone = isset($_SESSION['timezone']) ? $_SESSION['timezone'] : $GLOBALS['_CFG']['timezone'];
 
@@ -252,12 +244,12 @@ class Times
      * @return  string
      */
 
-    public static function local_date($format, $time = NULL)
+     function local_date($format, $time = NULL)
     {
         $timezone = isset($_SESSION['timezone']) ? $_SESSION['timezone'] : $GLOBALS['_CFG']['timezone'];
 
         if ($time === NULL) {
-            $time = self::gmtime();
+            $time = gmtime();
         } elseif ($time <= 0) {
             return '';
         }
@@ -275,7 +267,7 @@ class Times
      *
      * @return  integer
      */
-    public static function gmstr2time($str)
+     function gmstr2time($str)
     {
         $time = strtotime($str);
 
@@ -294,7 +286,7 @@ class Times
      *
      * @return  integer
      */
-    public static function local_strtotime($str)
+     function local_strtotime($str)
     {
         $timezone = isset($_SESSION['timezone']) ? $_SESSION['timezone'] : $GLOBALS['_CFG']['timezone'];
 
@@ -315,9 +307,9 @@ class Times
      *
      * @return  array
      */
-    public static function local_gettime($timestamp = NULL)
+     function local_gettime($timestamp = NULL)
     {
-        $tmp = self::local_getdate($timestamp);
+        $tmp = local_getdate($timestamp);
         return $tmp[0];
     }
 
@@ -328,7 +320,7 @@ class Times
      *
      * @return  array
      */
-    public static function local_getdate($timestamp = NULL)
+     function local_getdate($timestamp = NULL)
     {
         $timezone = isset($_SESSION['timezone']) ? $_SESSION['timezone'] : $GLOBALS['_CFG']['timezone'];
 
@@ -344,4 +336,3 @@ class Times
     }
 
 
-}
