@@ -1,16 +1,7 @@
 <?php
-/**
- * Created by u0mo5.
- * User: u0mo5
- * Date: 2015/9/30
- * Time: 13:36
- */
-namespace U0mo5\Tools;
-class Systems
-{
 
     //判断是否是手机访问     from   thinkphp
-    public static function is_mobile()
+ function is_mobile()
     {
 
             $user_agent = $_SERVER['HTTP_USER_AGENT'];
@@ -25,7 +16,6 @@ class Systems
             }
 
             return $is_mobile;
-        }
-
-
     }
+
+

@@ -16,11 +16,15 @@
 
         },
         "files": [
-            "src/Files/functions.php",
-            "src/Webs/functions.php",
-            "src/Strings/functions.php",
+            "src/Arrays/functions.php",
             "src/Debugs/functions.php",
-            "src/Arrays/functions.php"
+            "src/Excels/functions.php",
+            "src/Files/functions.php",
+            "src/Images/functions.php",
+            "src/Strings/functions.php",
+            "src/Systems/functions.php",
+            "src/Times/functions.php",
+            "src/Webs/functions.php"
         ]
     }
 }
