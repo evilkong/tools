@@ -25,11 +25,11 @@
  *     3.remove(array('key','value_find')); //查找方式删除;多条数据
  * reset($arr);//初始化数据
  */
+
 namespace U0mo5\Tools\Files;
-use U0mo5\Tools\Files\Files as F;
 
 define('CONFIG_EXIT', '<?php exit;?>');
-class FileCache{
+class fileCache{
     private $data;
     private $file;
     private $file_hash;//最后一次修改；保存时判断，如果有新修改则先读取再保存
@@ -165,14 +165,14 @@ class FileCache{
      */
     public static function load($file){//10000次需要4s 数据量差异不大。
         if (!$file) return false;
-        $file = F::iconv_system($file);
+        $file = iconv_system($file);
         $file_lock = $file.'.lock';
         if ( (!file_exists($file) || filesize($file) == 0 ) &&
             !file_exists($file_lock) ){//并发下；正在写或删除
             @file_put_contents($file,CONFIG_EXIT);
         }
 
-        $str = F::file_read_safe($file,0.4);
+        $str = file_read_safe($file,0.4);
         if($str === false || strlen($str) == 0){
             $time = @filemtime($file);
             //服务器崩溃下文件不存在异常恢复
@@ -195,14 +195,14 @@ class FileCache{
      */
     public static function save($file,$data){//10000次需要6s
         if (!$file) return false;
-        $file = F::iconv_system($file);
+        $file = iconv_system($file);
         if (!file_exists($file)){
             @touch($file);
         }
-        F::chmod_path($file,0777);
-        if (!F::path_writeable($file)) {
+        chmod_path($file,0777);
+        if (!path_writeable($file)) {
             if(isset($GLOBALS['L'])){
-                F::show_tips(BASIC_PATH."<br/>".$GLOBALS['L']['path_can_not_write_data']);
+                show_tips(BASIC_PATH."<br/>".$GLOBALS['L']['path_can_not_write_data']);
             }else{
                 show_tips('"data/" can not write!');
             }
@@ -212,6 +212,6 @@ class FileCache{
             show_tips('json_encode error!');
         }
         $buffer = CONFIG_EXIT.$json_str;
-        return F::file_write_safe($file,$buffer,0.3);
+        return file_wirte_safe($file,$buffer,0.3);
     }
 }

@@ -14,6 +14,9 @@
  *
  * $cm->imgRotate('out.jpg',90);			//旋转图片
  */
+
+namespace U0mo5\Tools\Images;
+
 class Thumb {
 	var $srcFile = '';	//原图
 	var $imgData = '';	//图片信息
