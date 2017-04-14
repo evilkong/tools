@@ -6,7 +6,7 @@
  * Time: 13:36
  */
 namespace U0mo5\Tools\Strings;
-class String
+class Strings
 {
 
     /**

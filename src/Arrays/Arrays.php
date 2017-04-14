@@ -1,5 +1,5 @@
 <?php
-namespace U0mo5\Tools;
+namespace U0mo5\Tools\Arrays;
 class Arrays {
 	
 	/**
