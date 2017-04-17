@@ -1,15 +1,15 @@
 <?php
 
+// +----------------------------------------------------------------------
+// | ThinkPHP [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2006-2016 http://thinkphp.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: 刘志淳 <chun@engineer.com>
+// +----------------------------------------------------------------------
 
-    //获得当前毫秒级时间戳
-     function getMillisecond() {
-        list($t1, $t2) = explode(' ', microtime());
-        return (float)sprintf('%.0f',(floatval($t1)+floatval($t2))*1000);
-    }
-    //获得时间
-     function get_datetime(){
-        return  date ( 'Y-m-d H:i:s' ) ;
-    }
 
     /**
      * 返回今日开始和结束的时间戳
@@ -65,7 +65,8 @@
             strtotime(date('Y-m-d', strtotime("last week Sunday", $timestamp))) + 24 * 3600 - 1
         ];
     }
-//from   topthink
+
+
     /**
      * 返回本月开始和结束的时间戳
      *
@@ -190,6 +191,9 @@
     {
         return daysToSecond() * 7 * $week;
     }
+
+
+
 //from ecshop   thanks
     /**
      * 获得当前格林威治时间的时间戳
@@ -336,3 +340,12 @@
     }
 
 
+//获得当前毫秒级时间戳
+function getMillisecond() {
+    list($t1, $t2) = explode(' ', microtime());
+    return (float)sprintf('%.0f',(floatval($t1)+floatval($t2))*1000);
+}
+//获得时间
+function get_datetime(){
+    return  date ( 'Y-m-d H:i:s' ) ;
+}

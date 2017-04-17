@@ -124,25 +124,25 @@ function filter_html($html){
 	return preg_replace($find,$replace,$html);
 }
 
-/**
- * 将obj深度转化成array
- * 
- * @param  $obj 要转换的数据 可能是数组 也可能是个对象 还可能是一般数据类型
- * @return array || 一般数据类型
- */
-function obj2array($obj){
-	if (is_array($obj)) {
-		foreach($obj as &$value) {
-			$value = obj2array($value);
-		} 
-		return $obj;
-	} elseif (is_object($obj)) {
-		$obj = get_object_vars($obj);
-		return obj2array($obj);
-	} else {
-		return $obj;
-	} 
-}
+///**
+// * 将obj深度转化成array
+// *
+// * @param  $obj 要转换的数据 可能是数组 也可能是个对象 还可能是一般数据类型
+// * @return array || 一般数据类型
+// */
+//function obj2array($obj){
+//	if (is_array($obj)) {
+//		foreach($obj as &$value) {
+//			$value = obj2array($value);
+//		}
+//		return $obj;
+//	} elseif (is_object($obj)) {
+//		$obj = get_object_vars($obj);
+//		return obj2array($obj);
+//	} else {
+//		return $obj;
+//	}
+//}
 
 function ignore_timeout(){
 	@ignore_user_abort(true);
@@ -265,85 +265,85 @@ if (!function_exists('gzdecode')) {
 	}
 }
 
-/**
- * 二维数组按照指定的键值进行排序，
- * 
- * @param  $keys 根据键值
- * @param  $type 升序降序
- * @return array $array = array(
- * array('name'=>'手机','brand'=>'诺基亚','price'=>1050),
- * array('name'=>'手表','brand'=>'卡西欧','price'=>960)
- * );$out = array_sort($array,'price');
- */
-function array_sort($arr, $keys, $type = 'asc'){
-	$keysvalue = $new_array = array();
-	foreach ($arr as $k => $v) {
-		$keysvalue[$k] = $v[$keys];
-	} 
-	if ($type == 'asc') {
-		asort($keysvalue);
-	} else {
-		arsort($keysvalue);
-	} 
-	reset($keysvalue);
-	foreach ($keysvalue as $k => $v) {
-		$new_array[$k] = $arr[$k];
-	} 
-	return $new_array;
-} 
-/**
- * 遍历数组，对每个元素调用 $callback，假如返回值不为假值，则直接返回该返回值；
- * 假如每次 $callback 都返回假值，最终返回 false
- * 
- * @param  $array 
- * @param  $callback 
- * @return mixed 
- */
-function array_try($array, $callback){
-	if (!$array || !$callback) {
-		return false;
-	} 
-	$args = func_get_args();
-	array_shift($args);
-	array_shift($args);
-	if (!$args) {
-		$args = array();
-	} 
-	foreach($array as $v) {
-		$params = $args;
-		array_unshift($params, $v);
-		$x = call_user_func_array($callback, $params);
-		if ($x) {
-			return $x;
-		} 
-	} 
-	return false;
-} 
-// 求多个数组的并集
-function array_union(){
-	$argsCount = func_num_args();
-	if ($argsCount < 2) {
-		return false;
-	} else if (2 === $argsCount) {
-		list($arr1, $arr2) = func_get_args();
-
-		while ((list($k, $v) = each($arr2))) {
-			if (!in_array($v, $arr1)) $arr1[] = $v;
-		} 
-		return $arr1;
-	} else { // 三个以上的数组合并
-		$arg_list = func_get_args();
-		$all = call_user_func_array('array_union', $arg_list);
-		return array_union($arg_list[0], $all);
-	} 
-}
-// 取出数组中第n项
-function array_get_index($arr,$index){
-   foreach($arr as $k=>$v){
-	   $index--;
-	   if($index<0) return array($k,$v);
-   }
-}
+///**
+// * 二维数组按照指定的键值进行排序，
+// *
+// * @param  $keys 根据键值
+// * @param  $type 升序降序
+// * @return array $array = array(
+// * array('name'=>'手机','brand'=>'诺基亚','price'=>1050),
+// * array('name'=>'手表','brand'=>'卡西欧','price'=>960)
+// * );$out = array_sort($array,'price');
+// */
+//function array_sort($arr, $keys, $type = 'asc'){
+//	$keysvalue = $new_array = array();
+//	foreach ($arr as $k => $v) {
+//		$keysvalue[$k] = $v[$keys];
+//	}
+//	if ($type == 'asc') {
+//		asort($keysvalue);
+//	} else {
+//		arsort($keysvalue);
+//	}
+//	reset($keysvalue);
+//	foreach ($keysvalue as $k => $v) {
+//		$new_array[$k] = $arr[$k];
+//	}
+//	return $new_array;
+//}
+///**
+// * 遍历数组，对每个元素调用 $callback，假如返回值不为假值，则直接返回该返回值；
+// * 假如每次 $callback 都返回假值，最终返回 false
+// *
+// * @param  $array
+// * @param  $callback
+// * @return mixed
+// */
+//function array_try($array, $callback){
+//	if (!$array || !$callback) {
+//		return false;
+//	}
+//	$args = func_get_args();
+//	array_shift($args);
+//	array_shift($args);
+//	if (!$args) {
+//		$args = array();
+//	}
+//	foreach($array as $v) {
+//		$params = $args;
+//		array_unshift($params, $v);
+//		$x = call_user_func_array($callback, $params);
+//		if ($x) {
+//			return $x;
+//		}
+//	}
+//	return false;
+//}
+//// 求多个数组的并集
+//function array_union(){
+//	$argsCount = func_num_args();
+//	if ($argsCount < 2) {
+//		return false;
+//	} else if (2 === $argsCount) {
+//		list($arr1, $arr2) = func_get_args();
+//
+//		while ((list($k, $v) = each($arr2))) {
+//			if (!in_array($v, $arr1)) $arr1[] = $v;
+//		}
+//		return $arr1;
+//	} else { // 三个以上的数组合并
+//		$arg_list = func_get_args();
+//		$all = call_user_func_array('array_union', $arg_list);
+//		return array_union($arg_list[0], $all);
+//	}
+//}
+//// 取出数组中第n项
+//function array_get_index($arr,$index){
+//   foreach($arr as $k=>$v){
+//	   $index--;
+//	   if($index<0) return array($k,$v);
+//   }
+//}
 
 //set_error_handler('errorHandler',E_ERROR|E_PARSE|E_CORE_ERROR|E_COMPILE_ERROR|E_USER_ERROR);
 register_shutdown_function('fatalErrorHandler');
@@ -1052,7 +1052,15 @@ echo cut_str($str, 1, 0).'**'.cut_str($str, 1, -1);
     }
     return $str;
 }
-//from topthink
+// +----------------------------------------------------------------------
+// | ThinkPHP [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2006-2015 http://thinkphp.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: yunwuxin <448901948@qq.com>
+// +----------------------------------------------------------------------
 /**
  * 检查字符串中是否包含某些字符串
  * @param string       $haystack
