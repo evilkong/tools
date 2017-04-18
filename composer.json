@@ -24,6 +24,7 @@
             "src/Strings/functions.php",
             "src/Systems/functions.php",
             "src/Times/functions.php",
+            "src/Validates/functions.php",
             "src/Webs/functions.php"
         ]
     }

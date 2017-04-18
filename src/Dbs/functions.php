@@ -44,3 +44,40 @@
         }
     }
 }
+
+
+/**
+ *
+ *阻止 SQL 注入 SQL 注入 或者 SQLi 常见的攻击网站的手段，使用下面的代码可以帮助你防止这些工具。
+ *
+ * @param $input
+ * @return string
+//$text = "<script>alert(1)</script>";
+//$text = clean($text);
+//echo $text;
+ */
+
+function clean($input)
+{
+    if (is_array($input))
+    {
+        foreach ($input as $key => $val)
+        {
+            $output[$key] = clean($val);
+            // $output[$key] = $this->clean($val);
+        }
+    }
+    else
+    {
+        $output = (string) $input;
+        // if magic quotes is on then use strip slashes
+        if (get_magic_quotes_gpc())
+        {
+            $output = stripslashes($output);
+        }
+        // $output = strip_tags($output);
+        $output = htmlentities($output, ENT_QUOTES, 'UTF-8');
+    }
+// return the clean text
+    return $output;
+}

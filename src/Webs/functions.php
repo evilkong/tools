@@ -66,6 +66,13 @@ function this_url(){
 	$url = get_host().$_SERVER['REQUEST_URI'];
 	return $url;
 }
+function current_url()
+{
+    $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $validURL = str_replace("&", "&", $url);
+    return validURL;
+}
+
 function reset_path($str){
 	return str_replace('\\','/',$str);
 }
@@ -749,4 +756,160 @@ function curlPost($url, $data, $timeout = 30)
     $data = curl_exec($ch);
     curl_close($ch);
     return $data;
+}
+//使用 tinyurl 生成短网址
+function get_tiny_url($url)
+{
+    $ch = curl_init();
+    $timeout = 5;
+    curl_setopt($ch,CURLOPT_URL,'http://tinyurl.com/api-create.php?url='.$url);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+    curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    return $data;
+}
+
+/**
+ *
+ * $ip = $_SERVER['REMOTE_ADDR'];
+$city = detect_city($ip);
+echo $city;
+ * @param $ip
+ * @return string
+ */
+function detect_city($ip) {
+
+    $default = 'UNKNOWN';
+
+    $curlopt_useragent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2) Gecko/20100115 Firefox/3.6 (.NET CLR 3.5.30729)';
+
+    $url = 'http://ipinfodb.com/ip_locator.php?ip=' . urlencode($ip);
+    $ch = curl_init();
+
+    $curl_opt = array(
+        CURLOPT_FOLLOWLOCATION => 1,
+        CURLOPT_HEADER => 0,
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_USERAGENT => $curlopt_useragent,
+        CURLOPT_URL => $url,
+        CURLOPT_TIMEOUT  => 1,
+        CURLOPT_REFERER  => 'http://' . $_SERVER['HTTP_HOST'],
+    );
+
+    curl_setopt_array($ch, $curl_opt);
+
+    $content = curl_exec($ch);
+
+    if (!is_null($curl_info)) {
+        $curl_info = curl_getinfo($ch);
+    }
+
+    curl_close($ch);
+
+    if ( preg_match('{<li>City : ([^<]*)</li>}i', $content, $regs) ) {
+        $city = $regs[1];
+    }
+    if ( preg_match('{<li>State/Province : ([^<]*)</li>}i', $content, $regs) ) {
+        $state = $regs[1];
+    }
+
+    if( $city!='' && $state!='' ){
+        $location = $city . ', ' . $state;
+        return $location;
+    }else{
+        return $default;
+    }
+
+}
+
+/**
+ * 获取 Web 页面的源代码 使用下面的函数，可以获取任意 Web 页面的 HTML 代码
+ * @param $url
+$url = "http://blog.koonk.com";
+$source = display_sourcecode($url);
+echo $source;
+ */
+function display_sourcecode($url)
+{
+    $lines = file($url);
+    $output = "";
+    foreach ($lines as $line_num => $line) {
+        // loop thru each line and prepend line numbers
+        $output.= "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "\n";
+    }
+    return $output;
+}
+
+/**
+ * 获取用户的真实  IP
+ * @return mixed
+ */
+function getRealIpAddr()
+{
+    if (!emptyempty($_SERVER['HTTP_CLIENT_IP']))
+    {
+        $ip=$_SERVER['HTTP_CLIENT_IP'];
+    }
+    elseif (!emptyempty($_SERVER['HTTP_X_FORWARDED_FOR']))
+        //to check ip is pass from proxy
+    {
+        $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    else
+    {
+        $ip=$_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
+
+/**
+ * 强制性文件下载 如果你需要下载特定的文件而不用另开新窗口，下面的代码片段可以帮助你。
+ * @param $file
+ force_download("image.jpg");
+ */
+function force_download($file)
+{
+    $dir = "../log/exports/";
+    if ((isset($file))&&(file_exists($dir.$file))) {
+        header("Content-type: application/force-download");
+        header('Content-Disposition: inline; filename="' . $dir.$file . '"');
+        header("Content-Transfer-Encoding: Binary");
+        header("Content-length: ".filesize($dir.$file));
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="' . $file . '"');
+        readfile("$dir$file");
+    } else {
+        echo "No file selected";
+    }
+}
+
+/**
+ *  获取远程文件的大小
+ * @param $url
+ * @param string $user
+ * @param string $pw
+ * @return string
+ * $file = "http://koonk.com/images/logo.png";
+$size = remote_filesize($url);
+echo $size;
+ */
+function remote_filesize($url, $user = "", $pw = "")
+{
+    ob_start();
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HEADER, 1);
+    curl_setopt($ch, CURLOPT_NOBODY, 1);
+    if(!empty($user) && !empty($pw))
+    {
+        $headers = array('Authorization: Basic ' . base64_encode("$user:$pw"));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    }
+    $ok = curl_exec($ch);
+    curl_close($ch);
+    $head = ob_get_contents();
+    ob_end_clean();
+    $regex = '/Content-Length:\s([0-9].+?)\s/';
+    $count = preg_match($regex, $head, $matches);
+    return isset($matches[1]) ? $matches[1] : "unknown";
 }
