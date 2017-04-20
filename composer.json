@@ -16,6 +16,7 @@
 
         },
         "files": [
+            "src/Algos/functions.php",
             "src/Arrays/functions.php",
             "src/Debugs/functions.php",
             "src/Excels/functions.php",
