@@ -6,25 +6,56 @@
 * @license http://kalcaddle.com/tools/licenses/license.txt
 */
 
+
+
+
+ function my_debug($arg,$label="",$line=""){
+    $status="Off";
+    if($status!="On"){
+        return;
+    }
+
+    if(is_array($arg)){
+        echo   "<pre><code>";
+        echo $label."(行数：".$line.")"."<br>";
+        echo json_encode($arg)."<br>";
+        echo   "</code></pre>";
+    }else{
+        echo   "<pre><code>";
+        echo $label."(行数：".$line.")"."<br>";
+        echo $arg."<br>";
+        echo   "</code></pre>";
+    }
+
+
+
+
+}
+
+
 /**
  * 写日志，方便测试（看网站需求，也可以改成把记录存入数据库）
  * 注意：服务器需要开通fopen配置
  * @param $word 要写入日志里的文本内容 默认值：空值
  */
-function log_out($var='') {
+function log_out($var='',$title="",$line="") {
+    $status="On";
+    if($status!="On"){
+        return;
+    }
     if (is_array($var)) {
-        $var=json_encode($var);
+        $var=json_encode($var, JSON_UNESCAPED_UNICODE);
     } else if (is_object($var)) {
-        $var=json_encode($var);
+        $var=json_encode($var, JSON_UNESCAPED_UNICODE);
     } else if (is_resource($var)) {
         $var=(string)$var;
     } else {
-        $var=json_encode($var);
+        $var=json_encode($var, JSON_UNESCAPED_UNICODE);
     }
 
     $fp = fopen("log.txt","a");
     flock($fp, LOCK_EX) ;
-    fwrite($fp,"执行日期：".strftime("%Y%m%d%H%M%S",time())."\n".$var."\n");
+    fwrite($fp,"\n"."执行日期：".strftime("%Y%m%d%H%M%S",time())."\n".$title."（行号： ".$line."）"."\n".$var."\n");
     flock($fp, LOCK_UN);
     fclose($fp);
 }

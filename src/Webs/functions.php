@@ -913,3 +913,7 @@ function remote_filesize($url, $user = "", $pw = "")
     $count = preg_match($regex, $head, $matches);
     return isset($matches[1]) ? $matches[1] : "unknown";
 }
+
+function set_charset($charset="utf-8"){
+    header("Content-type:text/html;charset={$charset}");
+}
