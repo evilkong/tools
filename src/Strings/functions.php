@@ -1214,3 +1214,16 @@ echo cut_str($str, 1, 0).'**'.cut_str($str, 1, -1);
     } else die("sorry, you have no libs support for charset changes.");
     return $output;
 }
+
+/**
+ * 保留字符串中的数字
+ * @param $str
+ * @return mixed
+ * // echo 123456
+echo number('Hello 123 world 456 !!');
+ */
+function str_number($str)
+{
+    return preg_replace('/\D/s', '', $str);
+}
+
