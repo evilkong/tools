@@ -1,7 +1,7 @@
 {
     "name": "u0mo5/tools",
     "description": "tools",
-    "version":"17.4.21",
+    "version":"17.5.26",
     "authors": [
         {
             "name": "Think Young",
@@ -26,7 +26,8 @@
             "src/Systems/functions.php",
             "src/Times/functions.php",
             "src/Validates/functions.php",
-            "src/Webs/functions.php"
+            "src/Webs/functions.php",
+            "src/Numbers/functions.php"
         ]
     }
 }
