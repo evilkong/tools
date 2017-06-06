@@ -22,6 +22,7 @@
             "src/Excels/functions.php",
             "src/Files/functions.php",
             "src/Images/functions.php",
+            "src/Regexs/functions.php",
             "src/Strings/functions.php",
             "src/Systems/functions.php",
             "src/Times/functions.php",
