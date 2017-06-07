@@ -2,6 +2,30 @@
 /**
  * 正则表达式
  */
+/**
+ * 填写正则 通用判断
+ * @param $value
+ * @param string $match
+ * @return int
+ */
+function is_Valid($value,$match=''){
+    return preg_match($match,$value);
+}
+
+/**
+ * 是否是数字
+ * @param $val
+ * @param string $match
+ * @return bool
+ */
+function is_Number($val,$match="^[0-9]+$")
+{
+    if(preg_match($match, $val)){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 /**
  * 检查用户名是否符合规定
@@ -28,7 +52,7 @@ function is_UserName($username, $minLen = 5, $maxLen = 20, $match = "/^[a-zA-Z0-
  * @param int $maxLen
  * @return bool|int
  */
-function isPWD($value, $minLen = 5, $maxLen = 20, $match = "")
+function is_PWD($value, $minLen = 5, $maxLen = 20, $match = "")
 {
     if (!$match) {
         $match = '/^[\\~!@#$%^&*()-_=+|{}\[\],.?\/:;\'\"\d\w]{' . $minLen . ',' . $maxLen . '}$/';
@@ -39,7 +63,7 @@ function isPWD($value, $minLen = 5, $maxLen = 20, $match = "")
     return preg_match($match, $v);
 }
 
-function isEmail($value, $match = '/^[\w\d]+[\wd-.]*@[w\d-.]+\.[\w\d]{2,10}$/i')
+function is_Email($value, $match = '/^[\w\d]+[\wd-.]*@[w\d-.]+\.[\w\d]{2,10}$/i')
 
 {
     $v = trim($value);
