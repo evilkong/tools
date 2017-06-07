@@ -36,8 +36,11 @@ function is_Number($val,$match="^[0-9]+$")
 function is_UserName($username, $minLen = 5, $maxLen = 20, $match = "/^[a-zA-Z0-9_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+$/")
 {
     $strlen = strlen($username);
-    if (!preg_match($match,$username)
-    ) //开源软件:phpfensi.com
+    if (!preg_match($match,
+        $username)) //开源软件:phpfensi.com
+    {
+        return false;
+    } elseif ($maxLen < $strlen || $strlen < $minLen)
     {
         return false;
     }
@@ -58,7 +61,7 @@ function is_PWD($value, $minLen = 5, $maxLen = 20, $match = "")
         $match = '/^[\\~!@#$%^&*()-_=+|{}\[\],.?\/:;\'\"\d\w]{' . $minLen . ',' . $maxLen . '}$/';
     }
     $v = trim($value);
-    if (emptyempty($v))
+    if (empty($v))
         return false;
     return preg_match($match, $v);
 }
@@ -67,7 +70,7 @@ function is_Email($value, $match = '/^[\w\d]+[\wd-.]*@[w\d-.]+\.[\w\d]{2,10}$/i'
 
 {
     $v = trim($value);
-    if (emptyempty($v))
+    if (empty($v))
         return false;
     return preg_match($match, $v);
 }
@@ -106,4 +109,28 @@ function is_Mobile($value,$match="/13\d{9}|15\d{9}|18\d{9}|17\d{9}|14\d{9}/"){
     } else {
         return false;
     }
+}
+
+
+function is_QQ($value,$match="[1-9][0-9]{4,}"){
+    return preg_match($match, $value);
+}
+
+function is_ZipCode($value,$match="[1-9]\d{5}(?!\d) "){
+    return preg_match($match, $value);
+}
+
+function is_IDcard($value,$match="\d{15}|\d{18} "){
+    return preg_match($match, $value);
+}
+
+function is_IP($value,$match="\d+\.\d+\.\d+\.\d+ "){
+    return preg_match($match, $value);
+}
+
+/***
+正整数
+ ***/
+function is_Positive_Integer ($value,$match="^[1-9]\d*$"){
+    return preg_match($match, $value);
 }

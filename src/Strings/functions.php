@@ -9,73 +9,73 @@
 /**
  * 加载类，从class目录；controller；model目录中寻找class
  */
-function _autoload($className){
-	if (file_exists(CLASS_DIR . strtolower($className) . '.class.php')) {
-		include(CLASS_DIR . strtolower($className) . '.class.php');
-	} else if (file_exists(CONTROLLER_DIR . strtolower($className) . '.class.php')) {
-		include(CONTROLLER_DIR . strtolower($className) . '.class.php');
-	} else if (file_exists(MODEl_DIR . strtolower($className) . '.class.php')) {
-		include(MODEl_DIR . strtolower($className) . '.class.php');
-	} else {
-		show_tips($className.' is not exist');
-	} 
-}
+//function _autoload($className){
+//	if (file_exists(CLASS_DIR . strtolower($className) . '.class.php')) {
+//		include(CLASS_DIR . strtolower($className) . '.class.php');
+//	} else if (file_exists(CONTROLLER_DIR . strtolower($className) . '.class.php')) {
+//		include(CONTROLLER_DIR . strtolower($className) . '.class.php');
+//	} else if (file_exists(MODEl_DIR . strtolower($className) . '.class.php')) {
+//		include(MODEl_DIR . strtolower($className) . '.class.php');
+//	} else {
+//		show_tips($className.' is not exist');
+//	}
+//}
 
 /**
  * 生产model对象
  */
-function init_model($model_name){
-	if (!class_exists($model_name.'Model')) {
-		$model_file = MODEL_DIR.$model_name.'Model.class.php';
-		if(!is_file($model_file)){
-			return false;
-		}
-		include($model_file);
-	}
-	$reflectionObj = new ReflectionClass($model_name.'Model');
-	$args = func_get_args();
-	array_shift($args);
-	return $reflectionObj -> newInstanceArgs($args);
-}
+//function init_model($model_name){
+//	if (!class_exists($model_name.'Model')) {
+//		$model_file = MODEL_DIR.$model_name.'Model.class.php';
+//		if(!is_file($model_file)){
+//			return false;
+//		}
+//		include($model_file);
+//	}
+//	$reflectionObj = new ReflectionClass($model_name.'Model');
+//	$args = func_get_args();
+//	array_shift($args);
+//	return $reflectionObj -> newInstanceArgs($args);
+//}
 /**
  * 生产controller对象
  */
-function init_controller($controller_name){
-	if (!class_exists($controller_name)) {
-		$model_file = CONTROLLER_DIR.$controller_name.'.class.php';
-		if(!is_file($model_file)){
-			return false;
-		}
-		include($model_file);
-	}
-	$reflectionObj = new ReflectionClass($controller_name);
-	$args = func_get_args();
-	array_shift($args);
-	return $reflectionObj -> newInstanceArgs($args);
-}
+//function init_controller($controller_name){
+//	if (!class_exists($controller_name)) {
+//		$model_file = CONTROLLER_DIR.$controller_name.'.class.php';
+//		if(!is_file($model_file)){
+//			return false;
+//		}
+//		include($model_file);
+//	}
+//	$reflectionObj = new ReflectionClass($controller_name);
+//	$args = func_get_args();
+//	array_shift($args);
+//	return $reflectionObj -> newInstanceArgs($args);
+//}
 
 /**
  * 加载类
  */
-function load_class($class){
-	$filename = CLASS_DIR.$class.'.class.php';
-	if (file_exists($filename)) {
-		include($filename);
-	}else{
-		show_tips($filename.' is not exist');
-	}
-}
+//function load_class($class){
+//	$filename = CLASS_DIR.$class.'.class.php';
+//	if (file_exists($filename)) {
+//		include($filename);
+//	}else{
+//		show_tips($filename.' is not exist');
+//	}
+//}
 /**
  * 加载函数库
  */
-function load_function($function){
-	$filename = FUNCTION_DIR.$function.'.function.php';
-	if (file_exists($filename)) {
-		include($filename);
-	}else{
-		show_tips($filename.' is not exist');
-	}
-}
+//function load_function($function){
+//	$filename = FUNCTION_DIR.$function.'.function.php';
+//	if (file_exists($filename)) {
+//		include($filename);
+//	}else{
+//		show_tips($filename.' is not exist');
+//	}
+//}
 /**
  * 文本字符串转换
  */
@@ -152,9 +152,7 @@ function ignore_timeout(){
 
 /**
  * 计算时间差
- * 
- * @param char $pretime 
- * @return char 
+ *
  */
 function spend_time(&$pretime){
 	$now = microtime(1);
@@ -1088,7 +1086,7 @@ echo cut_str($str, 1, 0).'**'.cut_str($str, 1, -1);
  function endsWith($haystack, $needles)
 {
     foreach ((array)$needles as $needle) {
-        if ((string)$needle === static::substr($haystack, -static::length($needle))) {
+        if ((string)$needle === substr($haystack, -length($needle))) {
             return true;
         }
     }
@@ -1204,7 +1202,7 @@ echo cut_str($str, 1, 0).'**'.cut_str($str, 1, -1);
  */
  function charsetDecode($input,$_input_charset ,$_output_charset) {
     $output = "";
-    if(!isset($_input_charset) )$_input_charset  = $_input_charset ;
+    if(!isset($_input_charset) ){$_input_charset  = $_input_charset ;}
     if($_input_charset == $_output_charset || $input ==null ) {
         $output = $input;
     } elseif (function_exists("mb_convert_encoding")) {
@@ -1227,3 +1225,23 @@ function str_number($str)
     return preg_replace('/\D/s', '', $str);
 }
 
+
+/**
+ * 截取文章摘要
+ * @param $data
+ * @param int $cut
+ * @param string $str
+ * @return mixed|string
+ */
+function cutArticle($data,$cut=0,$str="....")
+{
+
+    $data=strip_tags($data);//去除html标记
+    $pattern = "/&[a-zA-Z]+;/";//去除特殊符号
+    $data=preg_replace($pattern,'',$data);
+    if(!is_numeric($cut))
+        return $data;
+    if($cut>0)
+        $data=mb_strimwidth($data,0,$cut,$str,'utf-8');
+    return $data;
+}
