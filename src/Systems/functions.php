@@ -1,7 +1,7 @@
 <?php
 
     //判断是否是手机访问     from   thinkphp
- function is_mobile()
+ function is_From_Mobile()
     {
 
             $user_agent = $_SERVER['HTTP_USER_AGENT'];
