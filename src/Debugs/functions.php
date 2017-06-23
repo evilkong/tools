@@ -76,7 +76,20 @@ function console_log($data)
     }
 }
 
-
+/**
+ * 输出到页面控制台
+ * @param $data
+ */
+function console_debug($val){
+    $debug = debug_backtrace();
+    unset($debug[0]['args']);
+    echo '<script> try{',
+        'console.log('. json_encode(str_repeat ( "~~~" ,  40 )). ');',
+        'console.log('. json_encode($debug[0]). ');',
+        'console.log('. json_encode($val). ');',
+        'console.log('. json_encode(str_repeat ( "~~~" ,  40 )). ');',
+    '}catch(e){}</script>';
+}
 
 /**
  * 调试输出变量，对象的值。
