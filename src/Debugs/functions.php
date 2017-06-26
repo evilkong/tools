@@ -84,10 +84,10 @@ function console_debug($val){
     $debug = debug_backtrace();
     unset($debug[0]['args']);
     echo '<script> try{',
-        'console.log('. json_encode(str_repeat ( "~~~" ,  40 )). ');',
-        'console.log('. json_encode($debug[0]). ');',
-        'console.log('. json_encode($val). ');',
-        'console.log('. json_encode(str_repeat ( "~~~" ,  40 )). ');',
+        'console.debug('. json_encode(str_repeat ( "~~~" ,  40 )). ');',
+        'console.debug('. json_encode($debug[0]). ');',
+        'console.debug('. json_encode($val). ');',
+        'console.debug('. json_encode(str_repeat ( "~~~" ,  40 )). ');',
     '}catch(e){}</script>';
 }
 
