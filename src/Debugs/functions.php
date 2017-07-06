@@ -78,23 +78,23 @@ function console_log($data)
 
 /**
  * 输出到页面控制台
+ *  *bug:发现会影响页面样式
  * @param $data
  */
 function console_debug($val){
     $debug = debug_backtrace();
     unset($debug[0]['args']);
-    echo '<script> try{',
+    echo '<div  style="display:none;"><script> try{',
         'console.debug('. json_encode(str_repeat ( "~~~" ,  40 )). ');',
         'console.debug('. json_encode($debug[0]). ');',
         'console.debug('. json_encode($val). ');',
         'console.debug('. json_encode(str_repeat ( "~~~" ,  40 )). ');',
-    '}catch(e){}</script>';
+    '}catch(e){}</script></div>';
 }
 
 /**
  * 调试输出变量，对象的值。
  * 参数任意个(任意类型的变量)
- *
  * @return echo
  */
 function debug_out(){
