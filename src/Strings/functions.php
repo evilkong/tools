@@ -952,7 +952,7 @@ function pkcs5_pad($text, $block = 8){
  * @return string 字符串
  */
  function create_randomstr($lenth = 6) {
-    return self::random($lenth, '123456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ');
+    return random($lenth, '123456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ');
 }
 
 //生成随机字符串
