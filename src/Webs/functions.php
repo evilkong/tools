@@ -917,3 +917,53 @@ function remote_filesize($url, $user = "", $pw = "")
 function set_charset($charset="utf-8"){
     header("Content-type:text/html;charset={$charset}");
 }
+
+
+
+/**
+ * js 弹窗并且跳转
+ * @param string $_info
+ * @param string $_url
+ * @return js
+ */
+function alertLocation($_info, $_url) {
+    echo "<script type='text/javascript'>alert('$_info');location.href='$_url';</script>";
+
+}
+
+    /**
+     * js 弹窗返回
+     * @param string $_info
+     * @return js
+     */
+function alertBack($_info) {
+    echo "<script type='text/javascript'>alert('$_info');history.back();</script>";
+
+}
+
+    /**
+     * 页面跳转
+     * @param string $url
+     * @return js
+     */
+function headerUrl($url) {
+    echo "<script type='text/javascript'>location.href='{$url}';</script>";
+}
+
+    /**
+     * 弹窗关闭
+     * @param string $_info
+     * @return js
+     */
+function alertClose($_info) {
+    echo "<script type='text/javascript'>alert('$_info');close();</script>";
+}
+
+    /**
+     * 弹窗
+     * @param string $_info
+     * @return js
+     */
+function alert($_info) {
+    echo "<script type='text/javascript'>alert('$_info');</script>";
+}
