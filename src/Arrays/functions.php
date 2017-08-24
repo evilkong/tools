@@ -120,21 +120,23 @@ function obj2array($obj){
  * array('name'=>'手表','brand'=>'卡西欧','price'=>960)
  * );$out = array_sort($array,'price');
  */
-function array_sort($arr, $keys, $type = 'asc'){
-    $keysvalue = $new_array = array();
-    foreach ($arr as $k => $v) {
-        $keysvalue[$k] = $v[$keys];
+if (! function_exists('array_sort')) {
+    function array_sort($arr, $keys, $type = 'asc'){
+        $keysvalue = $new_array = array();
+        foreach ($arr as $k => $v) {
+            $keysvalue[$k] = $v[$keys];
+        }
+        if ($type == 'asc') {
+            asort($keysvalue);
+        } else {
+            arsort($keysvalue);
+        }
+        reset($keysvalue);
+        foreach ($keysvalue as $k => $v) {
+            $new_array[$k] = $arr[$k];
+        }
+        return $new_array;
     }
-    if ($type == 'asc') {
-        asort($keysvalue);
-    } else {
-        arsort($keysvalue);
-    }
-    reset($keysvalue);
-    foreach ($keysvalue as $k => $v) {
-        $new_array[$k] = $arr[$k];
-    }
-    return $new_array;
 }
 /**
  * 遍历数组，对每个元素调用 $callback，假如返回值不为假值，则直接返回该返回值；
