@@ -442,7 +442,7 @@ function get_caller_info() {
  * @params {int} 返回状态码， 通常0表示正常
  * @params {array} 返回的数据集合
  */
-function show_json($data,$code = true,$info=''){
+function show_json($data,$code = true,$info='',$url=''){
     $use_time = mtime() - $GLOBALS['config']['app_startTime'];
     $result = array('code'=>$code,'use_time'=>$use_time,'data'=>$data);
     if(defined("GLOBAL_DEBUG") && GLOBAL_DEBUG==1){
@@ -450,6 +450,9 @@ function show_json($data,$code = true,$info=''){
     }
     if ($info != '') {
         $result['info'] = $info;
+    }
+    if ($url != '') {
+        $result['url'] = $url;
     }
     ob_end_clean();
     header("X-Powered-By: kodExplorer.");
