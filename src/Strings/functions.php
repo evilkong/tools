@@ -443,8 +443,12 @@ function get_caller_info() {
  * @params {array} 返回的数据集合
  */
 function show_json($data,$code = true,$info='',$url=''){
-    $use_time = mtime() - $GLOBALS['config']['app_startTime'];
-    $result = array('code'=>$code,'use_time'=>$use_time,'data'=>$data);
+
+    $result = array('code'=>$code,'data'=>$data);
+    if(!empty($GLOBALS['config']['app_startTime'])){
+        $use_time = mtime() - $GLOBALS['config']['app_startTime'];
+        $result['use_time'] = $use_time;
+    }
     if(defined("GLOBAL_DEBUG") && GLOBAL_DEBUG==1){
         $result['call'] = get_caller_info();
     }
