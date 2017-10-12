@@ -1,7 +1,7 @@
 {
     "name": "u0mo5/tools",
     "description": "tools",
-    "version":"17.09.27",
+    "version":"17.10.12",
     "authors": [
         {
             "name": "Think Young",
@@ -9,7 +9,15 @@
         }
     ],
 	"minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "jaeger/querylist": "^3.1",
+        "jaeger/querylist-ext-request":"^1.0",
+        "jaeger/querylist-ext-multi":"^1.0",
+        "jaeger/querylist-ext-login":"^1.0",
+        "jaeger/querylist-ext-dimage": "^1.1"
+
+
+    },
 	"autoload": {
         "psr-4": {
             "U0mo5\\Tools\\": "src"
