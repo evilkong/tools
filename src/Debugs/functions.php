@@ -38,9 +38,9 @@
  * 注意：服务器需要开通fopen配置
  * @param $word 要写入日志里的文本内容 默认值：空值
  */
-function log_out($var='',$title="",$line="") {
-    $status="On";
-    if($status!="On"){
+function log_out($var='',$title="",$line="",$file="api") {
+//        $this->status="Off";
+    if(!$GLOBALS['DEBUG_STATUS']){
         return;
     }
     if (is_array($var)) {
@@ -53,7 +53,7 @@ function log_out($var='',$title="",$line="") {
         $var=json_encode($var, JSON_UNESCAPED_UNICODE);
     }
 
-    $fp = fopen("log.txt","a");
+    $fp = fopen("{$file}_debug.log","a");
     flock($fp, LOCK_EX) ;
     fwrite($fp,"\n"."执行日期：".strftime("%Y%m%d%H%M%S",time())."\n".$title."（行号： ".$line."）"."\n".$var."\n");
     flock($fp, LOCK_UN);
