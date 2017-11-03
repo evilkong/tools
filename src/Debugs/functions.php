@@ -34,9 +34,8 @@
 
 
 /**
- * 写日志，方便测试（看网站需求，也可以改成把记录存入数据库）
- * 注意：服务器需要开通fopen配置
- * @param $word 要写入日志里的文本内容 默认值：空值
+ * 写日志，方便测试
+ * log_out($var,"获取消息id",__LINE__,__CLASS__);
  */
 function log_out($var='',$title="",$line="",$file="api") {
 //        $this->status="Off";
@@ -44,18 +43,18 @@ function log_out($var='',$title="",$line="",$file="api") {
         return;
     }
     if (is_array($var)) {
-        $var=json_encode($var, JSON_UNESCAPED_UNICODE);
+        $var=json_encode($var, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
     } else if (is_object($var)) {
-        $var=json_encode($var, JSON_UNESCAPED_UNICODE);
+        $var=json_encode($var, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
     } else if (is_resource($var)) {
         $var=(string)$var;
     } else {
-        $var=json_encode($var, JSON_UNESCAPED_UNICODE);
+        $var=json_encode($var, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
     }
 
-    $fp = fopen("{$file}_debug.log","a");
+    $fp = fopen("{$file}_debug.html","a");
     flock($fp, LOCK_EX) ;
-    fwrite($fp,"\n"."执行日期：".strftime("%Y%m%d%H%M%S",time())."\n".$title."（行号： ".$line."）"."\n".$var."\n");
+    fwrite($fp, " "."\n"."<pre><font color='red'>执行日期：".strftime("%Y%m%d%H%M%S",time())."</font>\n"."<font color='blue'>".$title."（行号： ".$line."）"."</font>\n"." <code>".$var."\n"."</code></pre>"."\n");
     flock($fp, LOCK_UN);
     fclose($fp);
 }
