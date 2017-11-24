@@ -1,7 +1,7 @@
 {
     "name": "u0mo5/tools",
     "description": "tools",
-    "version":"17.10.12",
+    "version":"17.11.24",
     "authors": [
         {
             "name": "Think Young",
@@ -14,7 +14,8 @@
         "jaeger/querylist-ext-request":"^1.0",
         "jaeger/querylist-ext-multi":"^1.0",
         "jaeger/querylist-ext-login":"^1.0",
-        "jaeger/querylist-ext-dimage": "^1.1"
+        "jaeger/querylist-ext-dimage": "^1.1",
+        "phpmailer/phpmailer": "^5.2"
 
 
     },
@@ -30,6 +31,7 @@
             "src/Excels/functions.php",
             "src/Files/functions.php",
             "src/Images/functions.php",
+            "src/Mails/functions.php",
             "src/Regexs/functions.php",
             "src/Safes/functions.php",
             "src/Strings/functions.php",
