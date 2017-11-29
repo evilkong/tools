@@ -1258,3 +1258,22 @@ function write_log($log, $type = 'default', $level = 'log'){
     clearstatcache();
     return error_log("$now_time $log\n", 3, $target);
 }
+
+/**
+ * 高并发下   写文件锁  避免占用失败
+ * @param $filepath
+ * @param $data
+ * @return bool|int
+ */
+function writeData($filepath, $data)
+{
+    $fp = fopen($filepath,'a');
+    do{
+        usleep(100);
+    }while (!flock($fp, LOCK_EX));
+
+    $res = fwrite($fp, $data."\n");
+    flock($fp, LOCK_UN);
+    fclose($fp);
+    return $res;
+}

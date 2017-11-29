@@ -57,13 +57,13 @@
 //echo $text;
  */
 
-function clean($input)
+function cleanSQL($input)
 {
     if (is_array($input))
     {
         foreach ($input as $key => $val)
         {
-            $output[$key] = clean($val);
+            $output[$key] = cleanSQL($val);
             // $output[$key] = $this->clean($val);
         }
     }
@@ -80,4 +80,84 @@ function clean($input)
     }
 // return the clean text
     return $output;
+}
+
+/**
+ * 单条row数组转化成sql
+ * @param $array
+ * @param string $type
+ * @param array $exclude
+ * @param string $table
+ * @param string $ext
+ * @return string
+ */
+function array_to_sql($array, $type='insert', $exclude = array(),$table="",$ext=""){
+
+    $sql = '';
+    if(count($array) > 0){
+        foreach ($exclude as $exkey) {
+            unset($array[$exkey]);//剔除不要的key
+        }
+
+        if('insert' == $type){
+
+            $keys = array_keys($array);
+            $values = array_values($array);
+            $col = implode("`, `", $keys);
+            $val = implode("', '", $values);
+            $sql= "(`$col`) values('$val')";
+        }else if('update' == $type){
+            $tempsql = '';
+            $temparr = array();
+            foreach ($array as $key => $value) {
+                $tempsql = "'$key' = '$value'";
+                $temparr[] = $tempsql;
+            }
+
+            $sql = implode(",", $temparr);
+        }else if('insert_update' == $type){
+            $keys = array_keys($array);
+            $values = array_values($array);
+            $col = implode("`, `", $keys);
+            $val = implode("', '", $values);
+            $tempsql = '';
+            $temparr = array();
+            foreach ($array as $key => $value) {
+                $tempsql = "$key = VALUES($key)";
+                $temparr[] = $tempsql;
+            }
+            $ups = implode(",", $temparr);
+            $sql= "insert into  $table  (`$col`) values('$val') "." ON DUPLICATE KEY  UPDATE $ext   $ups ;";
+        }
+    }
+    return $sql;
+}
+
+/**
+ * todo  toTest
+ * @param $arrays
+ * @param array $exclude
+ * @param string $table
+ * @param string $ext
+ * @return string
+ */
+function batch_insert_sql($arrays,  $exclude = array(),$table="table",$ext=""){
+
+    $sql = '';
+    if(count($arrays) > 0){
+        foreach ($exclude as $exkey) {
+            unset($arrays[$exkey]);//剔除不要的key
+        }
+        $keys = array_keys($arrays[0]);
+        $col = implode("`, `", $keys);
+        $sql .="insert into {$table} (`$col`) values ";
+        foreach($arrays as $array){
+
+            $values = array_values($array);
+            $val = implode("', '", $values);
+            $sql.= " ('$val'), ";
+        }
+
+    }
+    return $sql;
 }

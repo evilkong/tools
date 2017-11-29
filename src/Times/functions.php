@@ -415,3 +415,18 @@ function nicetime($date)
 //echo date('Y-m-01', strtotime('-1 month'));
 //echo "<br/>";
 //echo date('Y-m-t', strtotime('-1 month'));
+
+/**
+ * 中文字符串转换为时间戳
+ * @param string $str
+ * @return false|int
+ */
+function ch_strtotime($str=''){
+// $str='2017年11月20日  14:00'
+    $str=str_replace("年","-",$str);
+    $str=str_replace("月","-",$str);
+    $str=str_replace("日","",$str);
+    // echo $str;
+    return strtotime($str);
+
+}

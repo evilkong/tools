@@ -18,4 +18,13 @@
             return $is_mobile;
     }
 
+/**
+ * clean linux mem buffer
+ */
+function clean_buffer(){
+
+
+    shell_exec("sync; echo 3 > /proc/sys/vm/drop_caches");
+}
+
 
