@@ -12,17 +12,19 @@
 
 
     /**
-     * 返回今日开始和结束的时间戳
+     * 返回今日开始和结束的时间戳 与laravel Carbon  冲突
      *
      * @return array
      */
-     function today()
+if(!function_exists('today')){
+    function today()
     {
         return [
             mktime(0, 0, 0, date('m'), date('d'), date('Y')),
             mktime(23, 59, 59, date('m'), date('d'), date('Y'))
         ];
     }
+}
 
     /**
      * 返回昨日开始和结束的时间戳
