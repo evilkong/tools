@@ -1,7 +1,7 @@
 {
     "name": "u0mo5/tools",
     "description": "tools",
-    "version":"17.12.14",
+    "version":"17.12.15",
     "authors": [
         {
             "name": "Think Young",
@@ -16,7 +16,7 @@
         "jaeger/querylist-ext-login":"^1.0",
         "jaeger/querylist-ext-dimage": "^1.1",
         "phpmailer/phpmailer": "^5.2",
-        "phpoffice/phpexcel":"^1.8.*"
+        "phpoffice/phpexcel":"1.8.*"
         
 
 
