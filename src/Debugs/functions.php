@@ -7,7 +7,9 @@
 */
 
 
-
+function debug(){
+        register_shutdown_function(function(){ var_dump(error_get_last()); });
+}
 
  function my_debug($arg,$label="",$line=""){
     $status="Off";
@@ -167,3 +169,5 @@ function get_var_name(&$aVar){
         }
     }
 }
+
+
