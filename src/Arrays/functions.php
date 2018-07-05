@@ -65,6 +65,80 @@ function array_add_index($arr,$key){
     return $out;
 }
 
+
+	/**
+	 * 添加数组中的某一列
+	 *
+	 * @param array $array
+	 * @param string $field
+	 * @return array
+	 */
+ function addCol($array, $field,$value="") {
+		if (!is_array($array) || count($array) < 1) {
+			return array();
+		}
+		foreach ($array as $k => $v) {
+			$array[$k][$field]=$value;
+		}
+		return $array;
+    }
+    
+    	/**
+	 * 查找数组中的某一列
+	 *
+	 * @param array $array
+	 * @param string $field
+	 * @return array
+	 */
+	 function findCol($array, $field,$value="") {
+		if (!is_array($array) || count($array) < 1) {
+			return array();
+		}
+		foreach ($array as $k => $v) {
+			if($array[$k][$field]==$value){
+            return $k;
+			}
+		}
+		return;
+	}
+
+
+    	/**
+	 * 移除一维数组中的空值
+	 * @param array $array
+	 * @return array
+	 */
+	 function removeNullCol($array){
+		if (!is_array($array) || count($array) < 1) {
+			return array();
+		}
+		foreach ($array as $key => $value){
+			if($value == ''){
+				unset($array[$key]);
+			}
+		}
+		return $array;
+    }
+    
+    	/**
+	 * 过滤数组字段
+	 * @param array $arr,$fields
+	 * @return array
+	 */
+	 function filterArray($arr,$fields){
+		$out=array();
+		foreach ($arr as $field => $value) {
+			// if (empty($value)) {
+			// 	 continue;
+			// }
+			if (in_array($field,$fields)) {
+				$out[$field]=$value;
+			}
+	
+	   }
+	   return $out;
+	}
+
 //from topthink
 function isAssoc(array $array)
 {
