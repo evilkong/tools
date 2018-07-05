@@ -8,7 +8,13 @@
 
 
 function debug(){
-        register_shutdown_function(function(){ var_dump(error_get_last()); });
+        // register_shutdown_function(function(){ var_dump(error_get_last()); });
+        register_shutdown_function(function(){
+            //  print_r(error_get_last()); 
+             $json=json_encode(error_get_last());
+             echo "<pre>" . $json . "</pre>";
+            }
+        );    
 }
 
  function my_debug($arg,$label="",$line=""){
