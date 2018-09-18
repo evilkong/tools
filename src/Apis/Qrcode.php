@@ -9,7 +9,7 @@
 namespace U0mo5\Tools\Apis;
 class Qrcode{
 //利用百度网盘分享的接口  from   baidu pan
-    public function show($url){
+    public static  function show($url){
 
         $url =  'http://pan.baidu.com/share/qrcode?w=400&h=400&url='.$url;
         ob_clean();
