@@ -1,3 +1,4 @@
 /vendor/
 cmd.bat
 test.php
+composer.lock

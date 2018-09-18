@@ -1,207 +1,238 @@
 <?php
-/**
- * 正则表达式
- */
-/**
- * 填写正则 通用判断
- * @param $value
- * @param string $match
- * @return int
- */
-function is_Valid($value,$match=''){
-    return preg_match($match,$value);
-}
-
-/**
- * 是否是数字
- * @param $val
- * @param string $match
- * @return bool
- */
-function is_Number($val,$match="^[0-9]+$")
-{
-    if(preg_match($match, $val)){
-        return true;
-    }else{
-        return false;
-    }
-}
-
-/**
- * 检查用户名是否符合规定
+/*
  *
- * @param STRING $username 要检查的用户名
- * @return TRUE or FALSE
+ *
  */
-function is_UserName($username, $minLen = 5, $maxLen = 20, $match = "/^[a-zA-Z0-9_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+$/")
+
+namespace U0mo5\Tools\Validates;
+
+class Validate
 {
-    $strlen = strlen($username);
-    if (!preg_match($match,
-        $username)) //开源软件:phpfensi.com
+    /**
+     * 正则表达式
+     */
+    /**
+     * 填写正则 通用判断
+     * @param $value
+     * @param string $match
+     * @return int
+     */
+    public static  function is_Valid($value, $match='')
     {
-        return false;
-    } elseif ($maxLen < $strlen || $strlen < $minLen)
-    {
-        return false;
-    }
-    return true;
-}
-
-
-/**
- * 密码:6—20位,由字母、数字组成
- * @param $value
- * @param int $minLen
- * @param int $maxLen
- * @return bool|int
- */
-function is_PWD($value, $minLen = 5, $maxLen = 20, $match = "")
-{
-    if (!$match) {
-        $match = '/^[\\~!@#$%^&*()-_=+|{}\[\],.?\/:;\'\"\d\w]{' . $minLen . ',' . $maxLen . '}$/';
-    }
-    $v = trim($value);
-    if (empty($v))
-        return false;
-    return preg_match($match, $v);
-}
-
-/**
- *  验证邮件格式
- *    $match ="/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/"
- * @param $value
- * @param string $match
- * @return bool|int
- */
-function is_Email($value, $match = '/^[\w\d]+[\wd-.]*@[w\d-.]+\.[\w\d]{2,10}$/i')
-{
-    $v = trim($value);
-    if (empty($v))
-        return false;
-
-    if(!filter_var($value,FILTER_VALIDATE_EMAIL))
-    {
-        return false;
-    }
-    return preg_match($match, $v);
-}
-
-
-
-
-//字符串长度区间合法验证
-function is_Length($str, $min=NULL, $max=NULL)
-{
-    preg_match_all("/./u", $str, $matches);
-    $len = count($matches[0]);
-    if(is_null($min) && !empty($max) && $len < $max){
-        return false;
-    }
-    if(is_null($max) && !empty($min) && $len > $min){
-        return false;
-    }
-    if ($len < $min || $len > $max) {
-        return false;
-    }
-    return true;
-}
-//字符串是否是中文
-function is_Chinese($value,$match="/^[\x80-\xff]{6,30}$/"){
-    return preg_match($match,$value);
-}
-
-//手机号
-function is_Mobile($value,$match="/13\d{9}|15\d{9}|18\d{9}|17\d{9}|14\d{9}/"){
-    //正则表达式
-    if (strlen($value) == "11") {
-        //上面部分判断长度是不是11位
-        /*接下来的正则表达式("/131,132,133,135,136,139开头随后跟着任意的8为数字 '|'(或者的意思)
-         * 151,152,153,156,158.159开头的跟着任意的8为数字
-         * 或者是188开头的再跟着任意的8为数字,匹配其中的任意一组就通过了
-         * /")*/
         return preg_match($match, $value);
-    } else {
+    }
+
+    /**
+     * 是否是数字
+     * @param $val
+     * @param string $match
+     * @return bool
+     */
+    public static  function is_Number($val, $match="^[0-9]+$")
+    {
+        if (preg_match($match, $val)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 检查用户名是否符合规定
+     *
+     * @param STRING $username 要检查的用户名
+     * @return TRUE or FALSE
+     */
+    public static  function is_UserName($username, $minLen = 5, $maxLen = 20, $match = "/^[a-zA-Z0-9_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]+$/")
+    {
+        $strlen = strlen($username);
+        if (!preg_match(
+        $match,
+        $username
+    )) { //开源软件:phpfensi.com
+            return false;
+        } elseif ($maxLen < $strlen || $strlen < $minLen) {
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
+     * 密码:6—20位,由字母、数字组成
+     * @param $value
+     * @param int $minLen
+     * @param int $maxLen
+     * @return bool|int
+     */
+    public static  function is_PWD($value, $minLen = 5, $maxLen = 20, $match = "")
+    {
+        if (!$match) {
+            $match = '/^[\\~!@#$%^&*()-_=+|{}\[\],.?\/:;\'\"\d\w]{' . $minLen . ',' . $maxLen . '}$/';
+        }
+        $v = trim($value);
+        if (empty($v)) {
+            return false;
+        }
+        return preg_match($match, $v);
+    }
+
+    /**
+     *  验证邮件格式
+     *    $match ="/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/"
+     * @param $value
+     * @param string $match
+     * @return bool|int
+     */
+    public static  function is_Email($value, $match = '/^[\w\d]+[\wd-.]*@[w\d-.]+\.[\w\d]{2,10}$/i')
+    {
+        $v = trim($value);
+        if (empty($v)) {
+            return false;
+        }
+
+        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
+        return preg_match($match, $v);
+    }
+
+
+
+
+    //字符串长度区间合法验证
+    public static  function is_Length($str, $min=null, $max=null)
+    {
+        preg_match_all("/./u", $str, $matches);
+        $len = count($matches[0]);
+        if (is_null($min) && !empty($max) && $len < $max) {
+            return false;
+        }
+        if (is_null($max) && !empty($min) && $len > $min) {
+            return false;
+        }
+        if ($len < $min || $len > $max) {
+            return false;
+        }
+        return true;
+    }
+    //字符串是否是中文
+    public static  function is_Chinese($value, $match="/^[\x80-\xff]{6,30}$/")
+    {
+        return preg_match($match, $value);
+    }
+
+    //手机号
+    public static  function is_Mobile($value, $match="/13\d{9}|15\d{9}|18\d{9}|17\d{9}|14\d{9}/")
+    {
+        //正则表达式
+        if (strlen($value) == "11") {
+            //上面部分判断长度是不是11位
+            /*接下来的正则表达式("/131,132,133,135,136,139开头随后跟着任意的8为数字 '|'(或者的意思)
+             * 151,152,153,156,158.159开头的跟着任意的8为数字
+             * 或者是188开头的再跟着任意的8为数字,匹配其中的任意一组就通过了
+             * /")*/
+            return preg_match($match, $value);
+        } else {
+            return false;
+        }
+    }
+
+
+    public static  function is_QQ($value, $match="[1-9][0-9]{4,}")
+    {
+        return preg_match($match, $value);
+    }
+
+    public static  function is_ZipCode($value, $match="[1-9]\d{5}(?!\d) ")
+    {
+        return preg_match($match, $value);
+    }
+
+
+    /**
+     * 验证身份证
+     * $match="/^\d{14}(\d{1}|\d{4}|(\d{3}[xX]))$/"
+     * @param $value
+     * @param string $match
+     * @return int
+     */
+    public static  function is_IDcard($value, $match="\d{15}|\d{18} ")
+    {
+        return preg_match($match, $value);
+    }
+
+    public static  function is_IP($value, $match="\d+\.\d+\.\d+\.\d+ ")
+    {
+        return preg_match($match, $value);
+    }
+
+    /***
+    正整数
+     ***/
+    public static  function is_Positive_Integer($value, $match="^[1-9]\d*$")
+    {
+        return preg_match($match, $value);
+    }
+
+
+
+    // 验证是否为空
+    public static  function is_NullStr($str)
+    {
+        if (trim($str) != "") {
+            return true;
+        }
         return false;
     }
-}
-
-
-function is_QQ($value,$match="[1-9][0-9]{4,}"){
-    return preg_match($match, $value);
-}
-
-function is_ZipCode($value,$match="[1-9]\d{5}(?!\d) "){
-    return preg_match($match, $value);
-}
-
-
-/**
- * 验证身份证
- * $match="/^\d{14}(\d{1}|\d{4}|(\d{3}[xX]))$/"
- * @param $value
- * @param string $match
- * @return int
- */
-function is_IDcard($value,$match="\d{15}|\d{18} "){
-    return preg_match($match, $value);
-}
-
-function is_IP($value,$match="\d+\.\d+\.\d+\.\d+ "){
-    return preg_match($match, $value);
-}
-
-/***
-正整数
- ***/
-function is_Positive_Integer ($value,$match="^[1-9]\d*$"){
-    return preg_match($match, $value);
-}
-
-
-
-// 验证是否为空
- function is_NullStr($str){
-    if(trim($str) != "") return true;
-    return false;
-}
 
 
 
 
 
 
-// 验证http地址
- function is_Http($str,$match="/[a-zA-Z]+:\/\/[^\s]*/"){
-    return preg_match($match, $str);
-}
+    // 验证http地址
+    public static  function is_Http($str, $match="/[a-zA-Z]+:\/\/[^\s]*/")
+    {
+        return preg_match($match, $str);
+    }
 
 
 
 
 
-// 匹配电话格式
- function is_Tel($str,$match="/^\d{3}-\d{8}$|^\d{4}-\d{7}$/"){
- return preg_match($match, $str);
-}
+    // 匹配电话格式
+    public static  function is_Tel($str, $match="/^\d{3}-\d{8}$|^\d{4}-\d{7}$/")
+    {
+        return preg_match($match, $str);
+    }
 
 
 
-// 匹配26个英文字母
- function is_En_Word($str,$match="/^[A-Za-z]+$/"){
-    if(preg_match($match, $str)) return true;
-    else return false;
-}
+    // 匹配26个英文字母
+    public static  function is_En_Word($str, $match="/^[A-Za-z]+$/")
+    {
+        if (preg_match($match, $str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-// 匹配只有中文
- function is_Cn_Word($str,$match="/^[\x80-\xff]+$/"){
-    if(preg_match($match, $str)) return true;
-    else return false;
-}
+    // 匹配只有中文
+    public static  function is_Cn_Word($str, $match="/^[\x80-\xff]+$/")
+    {
+        if (preg_match($match, $str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-//银行卡号校验 Luhn算法验证卡号
-function is_BankCard($card,$match=""){
-
-    $bankList = [
+    //银行卡号校验 Luhn算法验证卡号
+    public static  function is_BankCard($card, $match="")
+    {
+        $bankList = [
         '621098' => '邮储银行-绿卡通-借记卡',
         '622150' => '邮储银行-绿卡银联标准卡-借记卡',
         '622151' => '邮储银行-绿卡银联标准卡-借记卡',
@@ -2981,39 +3012,40 @@ function is_BankCard($card,$match=""){
         '62335108' => 'CJSC “Spitamen Bank”(30030762)-diamond-借记卡',
     ];
 
-    $card_8 = substr($card, 0, 8);
-    $card_6 = substr($card, 0, 6);
-    $card_5 = substr($card, 0, 5);
-    $card_4 = substr($card, 0, 4);
-    if (!isset($bankList[$card_8]) && !isset($bankList[$card_6]) && !isset($bankList[$card_5]) && !isset($bankList[$card_4]) ) {
-        return false;
-    }
-
-    //luhn 验证
-    $arr_no = str_split($card);
-    $last_n = $arr_no[count($arr_no)-1];
-    krsort($arr_no);
-    $i = 1;
-    $total = 0;
-    foreach ($arr_no as $n){
-        if($i%2==0){
-            $ix = $n*2;
-            if($ix>=10){
-                $nx = 1 + ($ix % 10);
-                $total += $nx;
-            }else{
-                $total += $ix;
-            }
-        }else{
-            $total += $n;
+        $card_8 = substr($card, 0, 8);
+        $card_6 = substr($card, 0, 6);
+        $card_5 = substr($card, 0, 5);
+        $card_4 = substr($card, 0, 4);
+        if (!isset($bankList[$card_8]) && !isset($bankList[$card_6]) && !isset($bankList[$card_5]) && !isset($bankList[$card_4])) {
+            return false;
         }
-        $i++;
-    }
-    $total -= $last_n;
-    $x = 10 - ($total % 10);
-    if($x == $last_n){
-        return true;
-    }else{
-        return  false;
+
+        //luhn 验证
+        $arr_no = str_split($card);
+        $last_n = $arr_no[count($arr_no)-1];
+        krsort($arr_no);
+        $i = 1;
+        $total = 0;
+        foreach ($arr_no as $n) {
+            if ($i%2==0) {
+                $ix = $n*2;
+                if ($ix>=10) {
+                    $nx = 1 + ($ix % 10);
+                    $total += $nx;
+                } else {
+                    $total += $ix;
+                }
+            } else {
+                $total += $n;
+            }
+            $i++;
+        }
+        $total -= $last_n;
+        $x = 10 - ($total % 10);
+        if ($x == $last_n) {
+            return true;
+        } else {
+            return  false;
+        }
     }
 }

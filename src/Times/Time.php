@@ -1,14 +1,23 @@
 <?php
+/*
+ *
+ *
+ */
+
+namespace U0mo5\Tools\Times;
+
+class Time
+{
 
 // +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK IT ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2006-2016 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: 刘志淳 <chun@engineer.com>
-// +----------------------------------------------------------------------
+    // | ThinkPHP [ WE CAN DO IT JUST THINK IT ]
+    // +----------------------------------------------------------------------
+    // | Copyright (c) 2006-2016 http://thinkphp.cn All rights reserved.
+    // +----------------------------------------------------------------------
+    // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+    // +----------------------------------------------------------------------
+    // | Author: 刘志淳 <chun@engineer.com>
+    // +----------------------------------------------------------------------
 
 
     /**
@@ -16,22 +25,22 @@
      *
      * @return array
      */
-if(!function_exists('today')){
-    function today()
+
+    public static  function today()
     {
         return [
             mktime(0, 0, 0, date('m'), date('d'), date('Y')),
             mktime(23, 59, 59, date('m'), date('d'), date('Y'))
         ];
     }
-}
+
 
     /**
      * 返回昨日开始和结束的时间戳
      *
      * @return array
      */
-     function yesterday()
+    public static  function yesterday()
     {
         $yesterday = date('d') - 1;
         return [
@@ -45,7 +54,7 @@ if(!function_exists('today')){
      *
      * @return array
      */
-     function week()
+    public static  function week()
     {
         $timestamp = time();
         return [
@@ -59,7 +68,7 @@ if(!function_exists('today')){
      *
      * @return array
      */
-     function lastWeek()
+    public static  function lastWeek()
     {
         $timestamp = time();
         return [
@@ -74,7 +83,7 @@ if(!function_exists('today')){
      *
      * @return array
      */
-     function month()
+    public static  function month()
     {
         return [
             mktime(0, 0, 0, date('m'), 1, date('Y')),
@@ -87,7 +96,7 @@ if(!function_exists('today')){
      *
      * @return array
      */
-     function lastMonth()
+    public static  function lastMonth()
     {
         $begin = mktime(0, 0, 0, date('m') - 1, 1, date('Y'));
         $end = mktime(23, 59, 59, date('m') - 1, date('t', $begin), date('Y'));
@@ -100,7 +109,7 @@ if(!function_exists('today')){
      *
      * @return array
      */
-     function year()
+    public static  function year()
     {
         return [
             mktime(0, 0, 0, 1, 1, date('Y')),
@@ -113,7 +122,7 @@ if(!function_exists('today')){
      *
      * @return array
      */
-     function lastYear()
+    public static  function lastYear()
     {
         $year = date('Y') - 1;
         return [
@@ -122,9 +131,8 @@ if(!function_exists('today')){
         ];
     }
 
-     function dayOf()
+    public static  function dayOf()
     {
-
     }
 
     /**
@@ -134,7 +142,7 @@ if(!function_exists('today')){
      * @param bool $now 返回现在或者昨天结束时间戳
      * @return array
      */
-     function dayToNow($day = 1, $now = true)
+    public static  function dayToNow($day = 1, $now = true)
     {
         $foo=null;
         $end = time();
@@ -154,7 +162,7 @@ if(!function_exists('today')){
      * @param int $day
      * @return int
      */
-     function daysAgo($day = 1)
+    public static  function daysAgo($day = 1)
     {
         $nowTime = time();
         return $nowTime - daysToSecond($day);
@@ -166,7 +174,7 @@ if(!function_exists('today')){
      * @param int $day
      * @return int
      */
-     function daysAfter($day = 1)
+    public static  function daysAfter($day = 1)
     {
         $nowTime = time();
         return $nowTime + daysToSecond($day);
@@ -178,7 +186,7 @@ if(!function_exists('today')){
      * @param int $day
      * @return int
      */
-     function daysToSecond($day = 1)
+    public static  function daysToSecond($day = 1)
     {
         return $day * 86400;
     }
@@ -189,20 +197,20 @@ if(!function_exists('today')){
      * @param int $week
      * @return int
      */
-     function weekToSecond($week = 1)
+    public static  function weekToSecond($week = 1)
     {
         return daysToSecond() * 7 * $week;
     }
 
 
 
-//from ecshop   thanks
+    //from ecshop   thanks
     /**
      * 获得当前格林威治时间的时间戳
      *
      * @return  integer
      */
-     function gmtime()
+    public static  function gmtime()
     {
         return (time() - date('Z'));
     }
@@ -212,7 +220,7 @@ if(!function_exists('today')){
      *
      * @return  integer
      */
-     function server_timezone()
+    public static  function server_timezone()
     {
         if (function_exists('date_default_timezone_get')) {
             return date_default_timezone_get();
@@ -227,7 +235,7 @@ if(!function_exists('today')){
      *
      *
      */
-     function local_mktime($hour = NULL, $minute = NULL, $second = NULL, $month = NULL, $day = NULL, $year = NULL)
+    public static  function local_mktime($hour = null, $minute = null, $second = null, $month = null, $day = null, $year = null)
     {
         $timezone = isset($_SESSION['timezone']) ? $_SESSION['timezone'] : $GLOBALS['_CFG']['timezone'];
 
@@ -250,11 +258,11 @@ if(!function_exists('today')){
      * @return  string
      */
 
-     function local_date($format, $time = NULL)
+    public static  function local_date($format, $time = null)
     {
         $timezone = isset($_SESSION['timezone']) ? $_SESSION['timezone'] : $GLOBALS['_CFG']['timezone'];
 
-        if ($time === NULL) {
+        if ($time === null) {
             $time = gmtime();
         } elseif ($time <= 0) {
             return '';
@@ -273,7 +281,7 @@ if(!function_exists('today')){
      *
      * @return  integer
      */
-     function gmstr2time($str)
+    public static  function gmstr2time($str)
     {
         $time = strtotime($str);
 
@@ -292,7 +300,7 @@ if(!function_exists('today')){
      *
      * @return  integer
      */
-     function local_strtotime($str)
+    public static  function local_strtotime($str)
     {
         $timezone = isset($_SESSION['timezone']) ? $_SESSION['timezone'] : $GLOBALS['_CFG']['timezone'];
 
@@ -303,7 +311,6 @@ if(!function_exists('today')){
         $time = strtotime($str) - $timezone * 3600;
 
         return $time;
-
     }
 
     /**
@@ -313,7 +320,7 @@ if(!function_exists('today')){
      *
      * @return  array
      */
-     function local_gettime($timestamp = NULL)
+    public static  function local_gettime($timestamp = null)
     {
         $tmp = local_getdate($timestamp);
         return $tmp[0];
@@ -326,12 +333,12 @@ if(!function_exists('today')){
      *
      * @return  array
      */
-     function local_getdate($timestamp = NULL)
+    public static  function local_getdate($timestamp = null)
     {
         $timezone = isset($_SESSION['timezone']) ? $_SESSION['timezone'] : $GLOBALS['_CFG']['timezone'];
 
         /* 如果时间戳为空，则获得服务器的当前时间 */
-        if ($timestamp === NULL) {
+        if ($timestamp === null) {
             $timestamp = time();
         }
 
@@ -342,93 +349,95 @@ if(!function_exists('today')){
     }
 
 
-//获得当前毫秒级时间戳
-function getMillisecond() {
-    list($t1, $t2) = explode(' ', microtime());
-    return (float)sprintf('%.0f',(floatval($t1)+floatval($t2))*1000);
-}
-//获得时间
-function get_datetime(){
-    return  date ( 'Y-m-d H:i:s' ) ;
-}
-
-//Facebook (x mins age, y hours ago etc)
-//$date = "2015-07-05 03:45";
-//$result = nicetime($date); // 2 days ago
-
-
-function nicetime($date)
-{
-    if(empty($date)) {
-        return "No date provided";
+    //获得当前毫秒级时间戳
+    public static  function getMillisecond()
+    {
+        list($t1, $t2) = explode(' ', microtime());
+        return (float)sprintf('%.0f', (floatval($t1)+floatval($t2))*1000);
+    }
+    //获得时间
+    public static  function get_datetime()
+    {
+        return  date('Y-m-d H:i:s') ;
     }
 
-    $periods  = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
-    $lengths  = array("60","60","24","7","4.35","12","10");
+    //Facebook (x mins age, y hours ago etc)
+    //$date = "2015-07-05 03:45";
+    //$result = nicetime($date); // 2 days ago
 
-    $now  = time();
-    $unix_date  = strtotime($date);
 
-    // check validity of date
-    if(empty($unix_date)) {
-        return "Bad date";
+    public static  function nicetime($date)
+    {
+        if (empty($date)) {
+            return "No date provided";
+        }
+
+        $periods  = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
+        $lengths  = array("60","60","24","7","4.35","12","10");
+
+        $now  = time();
+        $unix_date  = strtotime($date);
+
+        // check validity of date
+        if (empty($unix_date)) {
+            return "Bad date";
+        }
+        // is it future date or past date
+        if ($now > $unix_date) {
+            $difference = $now - $unix_date;
+            $tense  = "ago";
+        } else {
+            $difference = $unix_date - $now;
+            $tense  = "from now";
+        }
+
+        for ($j = 0; $difference >= $lengths[$j] && $j < count($lengths)-1; $j++) {
+            $difference /= $lengths[$j];
+        }
+
+        $difference = round($difference);
+
+        if ($difference != 1) {
+            $periods[$j].= "s";
+        }
+
+        return "$difference $periods[$j] {$tense}";
     }
-    // is it future date or past date
-    if($now > $unix_date) {
-        $difference = $now - $unix_date;
-        $tense  = "ago";
 
-    } else {
-        $difference = $unix_date - $now;
-        $tense  = "from now";
+
+    //昨天0时时间戳
+    //$yesterday_zero = strtotime(date('Y-m-d')) - 3600 * 24;
+    //昨天此时时间戳
+    //$yesterday_now = strtotime('-1 day');
+    //本周一时间戳
+    //$week_this_monday = strtotime('last Monday');
+    //明天时间戳
+    //$tomorrow = strtotime("+1 day");
+    //上周一时间戳
+    //$week_last_monday = strtotime('last Monday') - 3600 * 24 * 7;
+    //上周日时间戳
+    //$week_last_sunday = strtotime('last Monday') - 3600 * 24;
+    //本月第一天时间戳
+    //$month_first = strtotime(date("Y") . "-" . date("m") . "-1");
+    //本月最后一天时间戳
+    //$month_last = strtotime(date("Y") . "-" . date("m") . "-" . date("t"));
+    //获取上个月第一天及最后一天
+    //echo date('Y-m-01', strtotime('-1 month'));
+    //echo "<br/>";
+    //echo date('Y-m-t', strtotime('-1 month'));
+
+    /**
+     * 中文字符串转换为时间戳
+     * @param string $str
+     * @return false|int
+     */
+    public static  function ch_strtotime($str='')
+    {
+        // $str='2017年11月20日  14:00'
+        $str=str_replace("年", "-", $str);
+        $str=str_replace("月", "-", $str);
+        $str=str_replace("日", "", $str);
+        // echo $str;
+        return strtotime($str);
     }
-
-    for($j = 0; $difference >= $lengths[$j] && $j < count($lengths)-1; $j++) {
-        $difference /= $lengths[$j];
-    }
-
-    $difference = round($difference);
-
-    if($difference != 1) {
-        $periods[$j].= "s";
-    }
-
-    return "$difference $periods[$j] {$tense}";
-}
-
-
-//昨天0时时间戳
-//$yesterday_zero = strtotime(date('Y-m-d')) - 3600 * 24;
-//昨天此时时间戳
-//$yesterday_now = strtotime('-1 day');
-//本周一时间戳
-//$week_this_monday = strtotime('last Monday');
-//明天时间戳
-//$tomorrow = strtotime("+1 day");
-//上周一时间戳
-//$week_last_monday = strtotime('last Monday') - 3600 * 24 * 7;
-//上周日时间戳
-//$week_last_sunday = strtotime('last Monday') - 3600 * 24;
-//本月第一天时间戳
-//$month_first = strtotime(date("Y") . "-" . date("m") . "-1");
-//本月最后一天时间戳
-//$month_last = strtotime(date("Y") . "-" . date("m") . "-" . date("t"));
-//获取上个月第一天及最后一天
-//echo date('Y-m-01', strtotime('-1 month'));
-//echo "<br/>";
-//echo date('Y-m-t', strtotime('-1 month'));
-
-/**
- * 中文字符串转换为时间戳
- * @param string $str
- * @return false|int
- */
-function ch_strtotime($str=''){
-// $str='2017年11月20日  14:00'
-    $str=str_replace("年","-",$str);
-    $str=str_replace("月","-",$str);
-    $str=str_replace("日","",$str);
-    // echo $str;
-    return strtotime($str);
-
 }

@@ -1,4 +1,15 @@
 # tools
+
+更新索引
+composer dump-autoload
+-----
+## since 2018.09.18  收集者：u0mo5    http://u0mo5.github.io
+-----
+函数库会造成大量兼容冲突，全面改为静态类方法
+-----
+
+
+
 -----
 ## since 2017.04.14  收集者：u0mo5    http://u0mo5.github.io
 -----

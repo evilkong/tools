@@ -1,13 +1,20 @@
 <?php
-/**
- * 去两位小数，如果末尾是0，隐藏
+/*
+ *
+ * 
  */
+
+namespace U0mo5\Tools\Offices;
+
+class Office
+{
+
     /**
      * 导出功能
      * param fileName 导出文件名
      * param dataStr  数据字符串
      */
-        function export_excel($fileName , $dataStr)
+    public static  function export_excel($fileName, $dataStr)
     {
         header("Content-Type: application/vnd.ms-excel; charset=utf-8");
         Header("Accept-Ranges: bytes");
@@ -19,3 +26,4 @@
         echo $dataStr;
         exit;
     }
+}

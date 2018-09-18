@@ -1,7 +1,7 @@
 {
     "name": "u0mo5/tools",
     "description": "tools",
-    "version":"18.1.12",
+    "version":"18.9.18",
     "authors": [
         {
             "name": "Think Young",
@@ -10,13 +10,13 @@
     ],
 	"minimum-stability": "dev",
     "require": {
-        "jaeger/querylist": "^3.1",
-        "jaeger/querylist-ext-request":"^1.0",
-        "jaeger/querylist-ext-multi":"^1.0",
-        "jaeger/querylist-ext-login":"^1.0",
-        "jaeger/querylist-ext-dimage": "^1.1",
-        "phpmailer/phpmailer": "^5.2",
-        "phpoffice/phpexcel":"1.8.*"
+        "jaeger/querylist": "*",
+        "jaeger/querylist-ext-request":"*",
+        "jaeger/querylist-ext-multi":"*",
+        "jaeger/querylist-ext-login":"*",
+        "jaeger/querylist-ext-dimage": "*",
+        "phpmailer/phpmailer": "*",
+        "phpoffice/phpexcel":"*"
         
 
 
@@ -27,21 +27,7 @@
 
         },
         "files": [
-            "src/Algos/functions.php",
-            "src/Arrays/functions.php",
-            "src/Debugs/functions.php",
-            "src/Files/functions.php",
-            "src/Images/functions.php",
-            "src/Mails/functions.php",
-            "src/Numbers/functions.php",
-            "src/Offices/functions.php",
-            "src/Regexs/functions.php",
-            "src/Safes/functions.php",
-            "src/Strings/functions.php",
-            "src/Systems/functions.php",
-            "src/Times/functions.php",
-            "src/Validates/functions.php",
-            "src/Webs/functions.php"
+
         ]
     }
 }
